@@ -12,8 +12,16 @@ class PlaylistPage extends StatefulWidget {
 class _PlaylistPageState extends State<PlaylistPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: GridView.count(crossAxisCount: null).builder(itemBuilder: (context, index) {
-      return Text("listItem");
-    }));
+    return Center(
+        child: ListView.separated(
+      itemCount: 5,
+      itemBuilder: (context, index) {
+        return ListTile(title:Text("listItem") ,);
+      },
+      separatorBuilder: (context, index) => Divider(
+            color: Colors.cyanAccent,
+            height: 10,
+          ),
+    ));
   }
 }

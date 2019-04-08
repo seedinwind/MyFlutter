@@ -1,4 +1,4 @@
-# flutter_app
+# seedinwind.com.flutter_app
 
 A new Flutter application.
 

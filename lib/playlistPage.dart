@@ -17,54 +17,105 @@ class _PlaylistPageState extends State<PlaylistPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
+        widthFactor: 1.1,
         child: CustomScrollView(
-      slivers: <Widget>[
-        SliverToBoxAdapter(child: PlaylistBanner()),
-        SliverGrid(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return _buildHotItem(context, index);
-          }, childCount: 4),
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return _buildSectionItem(context, index);
-          }, childCount: 20),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return _buildElegantItem(context, index);
-          }, childCount: 100),
-        ),
-      ],
-    ));
+          slivers: <Widget>[
+            SliverToBoxAdapter(child: PlaylistBanner()),
+            SliverPadding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+                sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return _buildHotItem(context, index);
+                  }, childCount: 4),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 15,
+                      childAspectRatio: 1.33),
+                )),
+            SliverPadding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return _buildSectionItem(context, index);
+                  }, childCount: 20),
+                )),
+            SliverPadding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return _buildElegantItem(context, index);
+                  }, childCount: 100),
+                )),
+          ],
+        ));
   }
 
   Widget _buildHotItem(context, index) {
-    return Container(
-        child: Stack(
-      alignment: Alignment.center,
+//    return Container(
+//      decoration: BoxDecoration(
+//          image: DecorationImage(fit: BoxFit.fitHeight,image: CachedNetworkImageProvider(url))),
+//      child: Align(
+//        alignment: Alignment.bottomLeft,
+//        child: Text("demo"),
+//      ),
+//    );
+
+    return Stack(
       children: <Widget>[
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Image(image: CachedNetworkImageProvider(url)),
+        AspectRatio(
+          child:
+              Image(fit: BoxFit.fill, image: CachedNetworkImageProvider(url)),
+          aspectRatio: 1.33,
+        ),
+        Positioned(
+//          left: 10,
+          top: 10,
+          right: 10,
+          child: Text(
+            "20",
+            maxLines: 2,
+            textAlign: TextAlign.left,
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         Positioned(
           left: 10,
           bottom: 20,
-          child: Text("demo"),
+          right: 10,
+          child: Text(
+            "demoXXXXXXXXXXXXXXXXXXXX",
+            maxLines: 2,
+            textAlign: TextAlign.left,
+            style: TextStyle(color: Colors.white),
+          ),
         )
       ],
-    ));
+    );
   }
 
   Widget _buildSectionItem(context, index) {
-    return Container(child: Image(image: CachedNetworkImageProvider(url)));
+    return Container(
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: Stack(
+              children: <Widget>[
+                 Image(
+                      fit: BoxFit.fill,
+                      colorBlendMode: BlendMode.modulate,
+                      color: Colors.greenAccent,
+                      image: CachedNetworkImageProvider(url),
+                )
+
+              ],
+            )));
   }
 
   Widget _buildElegantItem(context, index) {
-    return Container(child: Image(image: CachedNetworkImageProvider(url)));
+    return Container(
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: Image(image: CachedNetworkImageProvider(url))));
   }
 }
 

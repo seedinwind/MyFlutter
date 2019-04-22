@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'homeData.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:toast/toast.dart';
 
 const url = "http://img2.2345.com/duoteimg/softImg/ztimg/1/1522054339_88.jpg";
 
@@ -61,7 +62,9 @@ class _PlaylistPageState extends State<PlaylistPage> {
 //      ),
 //    );
 
-    return Stack(
+    return GestureDetector(
+        onTap: dealClickHot(context,index),
+    child:Stack(
       children: <Widget>[
         AspectRatio(
           child:
@@ -91,32 +94,42 @@ class _PlaylistPageState extends State<PlaylistPage> {
           ),
         )
       ],
-    );
+    ));
   }
 
   Widget _buildSectionItem(context, index) {
-    return Container(
-        child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-            child: Stack(
-              children: <Widget>[
-                 Image(
+    return GestureDetector(
+        onTap: dealClickSection(context,index),
+        child: Container(
+            child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: Stack(
+                  children: <Widget>[
+                    Image(
                       fit: BoxFit.fill,
                       colorBlendMode: BlendMode.modulate,
                       color: Colors.greenAccent,
                       image: CachedNetworkImageProvider(url),
-                )
-
-              ],
-            )));
+                    )
+                  ],
+                ))));
   }
 
   Widget _buildElegantItem(context, index) {
-    return Container(
-        child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-            child: Image(image: CachedNetworkImageProvider(url))));
+    return GestureDetector(
+        onDoubleTap: dealClickElegant(context,index),
+        child: Container(
+            child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: Image(image: CachedNetworkImageProvider(url)))));
   }
+
+  dealClickElegant(BuildContext context,int index) {
+    Toast.show(index.toString(),context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+  }
+  dealClickSection(context,index) {}
+  dealClickHot(context,index) {}
+
 }
 
 class PlaylistBanner extends StatefulWidget {

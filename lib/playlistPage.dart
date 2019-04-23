@@ -63,7 +63,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
 //    );
 
     return GestureDetector(
-        onTap: dealClickHot(context,index),
+        onTap: ()=>dealClickHot(context,index),
     child:Stack(
       children: <Widget>[
         AspectRatio(
@@ -99,7 +99,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   Widget _buildSectionItem(context, index) {
     return GestureDetector(
-        onTap: dealClickSection(context,index),
+        onTap: ()=>dealClickSection(context,index),
         child: Container(
             child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -117,14 +117,14 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   Widget _buildElegantItem(context, index) {
     return GestureDetector(
-        onDoubleTap: dealClickElegant(context,index),
+        onTap: (){ dealClickElegant(context,index);},
         child: Container(
             child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: Image(image: CachedNetworkImageProvider(url)))));
   }
 
-  dealClickElegant(BuildContext context,int index) {
+ dealClickElegant(BuildContext context,int index) {
     Toast.show(index.toString(),context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
   }
   dealClickSection(context,index) {}
